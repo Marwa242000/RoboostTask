@@ -21,12 +21,13 @@
   "UpdateDetails": "تعديل بيانات الطالب",
   "Close": "إغلاق",
   "Action": "العملية",
-  "LogIn Now": "تسجيل الدخول",
+  "LogIn Now": " الدخول الان",
   "UserName": "أسم المتسخدم",
   "Password": "الرقم السري",
   "UserName is required": "اسم المتسخدم مطلوب",
   "Password is required": "الرقم السرى مطلوب",
   "LogIn": "الدخول",
   "Register": "تسجيل",
+  "RegisterNow":"تسجيل الدخول",
   "Copyright &copy; 2019 All Rights Reserved.": "جميع الحقوق محفوظه"
 }
