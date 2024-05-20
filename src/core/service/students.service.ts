@@ -19,4 +19,13 @@ export class StudentsService {
     const url = `${this.baseUrl}Delete?id=${studentID}`;
     return this._HttpClient.delete(url);
   }
+  getStudentById(id: number): Observable<Student> {
+    const url = `${this.baseUrl}GetByID?id=${id}`;
+
+    return this._HttpClient.get<Student>(url);
+  }
+
+  updateStudent(student: SimpleStudent): Observable<SimpleStudent> {
+    return this._HttpClient.put<SimpleStudent>(this.baseUrl + 'PUT', student);
+  }
 }
