@@ -1,0 +1,58 @@
+.active-link{
+   color: #fff !important;
+   background-color:cornflowerblue;
+   border-radius: 5px;
+   border: none;
+}
+/* styles.css */
+body[dir="rtl"] {
+   direction: rtl;
+   text-align: right;
+ }
+ .form-select{
+  width: 85%;
+ }
+ body[dir="ltr"] {
+   direction: ltr;
+   text-align: left;
+ }
+ 
+ 
+
+ body[dir="ltr"] .table-responsive th,
+ body[dir="ltr"] .table-responsive td {
+   text-align: left;
+ }
+ 
+ body[dir="rtl"] .table-responsive {
+   text-align: right;
+ }
+ 
+ body[dir="rtl"] .table-responsive th,
+ body[dir="rtl"] .table-responsive td {
+   text-align: left;
+ }
+
+
+body[dir="rtl"] #exampleModal .modal-content {
+  direction: rtl;
+  text-align: right;
+}
+
+body[dir="ltr"] #exampleModal .modal-content {
+  direction: ltr;
+  text-align: left;
+}
+
+
+/* Default LTR styles */
+
+
+body[dir="rtl"] #exampleModal .modal-header .btn-close {
+left:3rem;
+}
+
+@media (min-width: 992px) {
+  .social-icons {
+margin:auto; }
+}

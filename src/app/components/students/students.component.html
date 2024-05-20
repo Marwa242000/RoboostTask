@@ -1,0 +1,218 @@
+<section>
+  <div class="d-flex justify-content-between m-3">
+    <h2 class="text-center">{{ "Student List" | translate }}</h2>
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      {{ "AddStudent" | translate
+      }}<span><i class="fa-solid fa-plus ms-1"></i></span>
+    </button>
+  </div>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="searchText"
+      (input)="onSearchInput($event)"
+      [placeholder]="'Search' | translate"
+      aria-label="Search"
+    />
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>{{ "Name" | translate }}</th>
+          <th>{{ "Age" | translate }}</th>
+          <th>{{ "Email" | translate }}</th>
+          <th>{{ "Mobile" | translate }}</th>
+          <th>{{ "NationalID" | translate }}</th>
+          <th>{{ "Action" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of student">
+          <td>{{ student.Name }}</td>
+          <td>{{ student.Age }}</td>
+          <td>{{ student.Email }}</td>
+          <td>{{ student.Mobile }}</td>
+          <td>{{ student.NationalID }}</td>
+          <td>
+            <button
+              class="btn btn-primary ms-2"
+              [routerLink]="['/edit', student.ID]"
+            >
+              {{ "Edit" | translate }}
+            </button>
+            <button
+              class="btn btn-danger ms-2"
+              (click)="confirmDelete(student)"
+            >
+              {{ "Delete" | translate }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          {{ "AddStudent" | translate }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addStudentForm" (ngSubmit)="addNewStudent()">
+          <p *ngIf="errorMessage" class="alert alert-danger mt-1 text-center">
+            {{ errorMessage }}
+          </p>
+          <div class="form-item mb-3">
+            <label for="FirstName">{{ "FirstName" | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="FirstName"
+              formControlName="FirstName"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('FirstName')?.errors &&
+                addStudentForm.get('FirstName')?.touched
+              "
+              class="alert alert-danger mb-0"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('FirstName')?.errors &&
+                  addStudentForm.get('FirstName')?.touched
+                "
+                class="mb-0"
+              >
+                First Name is required
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="LastName">{{ "LastName" | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="LastName"
+              formControlName="LastName"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('LastName')?.errors &&
+                addStudentForm.get('LastName')?.touched
+              "
+              class="alert alert-danger"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('LastName')?.errors &&
+                  addStudentForm.get('LastName')?.touched
+                "
+                class="mb-0"
+              >
+                Last Name is required
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="Age">{{ "Age" | translate }}</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Age"
+              formControlName="Age"
+            />
+          </div>
+          <div class="form-item mb-3">
+            <label for="Email">{{ "Email" | translate }}</label>
+            <input
+              type="email"
+              class="form-control"
+              id="Email"
+              formControlName="Email"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('Email')?.errors &&
+                addStudentForm.get('Email')?.touched
+              "
+              class="alert alert-danger"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('Email')?.errors &&
+                  addStudentForm.get('Email')?.touched
+                "
+                class="mb-0"
+              >
+                Email not valid
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="Mobile">{{ "Mobile" | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Mobile"
+              formControlName="Mobile"
+            />
+          </div>
+          <div class="form-item mb-3">
+            <label for="NationalID">{{ "NationalID" | translate }}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NationalID"
+              formControlName="NationalID"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              {{ "Close" | translate }}
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="addStudentForm.invalid"
+              id="closeModal"
+            >
+              {{ "AddStudent" | translate
+              }}<span *ngIf="isLoading"
+                ><i class="fas fa-spin fa-spinner"></i
+              ></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

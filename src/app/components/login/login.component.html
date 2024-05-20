@@ -1,0 +1,66 @@
+<section class="w-75 mx-auto shadow rounded p-4 my-3 bg-main-light">
+  <h1 class="my-3">{{ "LogIn Now" | translate }}</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="handleForm()">
+    <div class="form-item">
+      <label for="UserName">{{ "UserName" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="UserName"
+        formControlName="UserName"
+      />
+      <div
+        *ngIf="
+          loginForm.get('UserName')?.errors &&
+          loginForm.get('UserName')?.touched
+        "
+        class="alert alert-danger"
+      >
+        <p
+          *ngIf="
+            loginForm.get('UserName')?.errors &&
+            loginForm.get('UserName')?.touched
+          "
+          class="mb-0"
+        >
+          {{ "UserName is required" | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="form-item">
+      <label for="Password">{{ "Password" | translate }}</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Password"
+        formControlName="Password"
+      />
+      <div
+        *ngIf="
+          loginForm.get('Password')?.errors &&
+          loginForm.get('Password')?.touched
+        "
+        class="alert alert-danger"
+      >
+        <p
+          *ngIf="
+            loginForm.get('Password')?.errors &&
+            loginForm.get('Password')?.touched
+          "
+          class="mb-0"
+        >
+          {{ "Password is required" | translate }}
+        </p>
+      </div>
+    </div>
+    <button [disabled]="loginForm.invalid" class="active-link mt-2 py-2">
+      {{ "LogIn" | translate }}
+      <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
+    </button>
+  </form>
+  <div>
+    <p *ngIf="errorMessage" class="alert alert-danger mt-1 text-center">
+      {{ errorMessage }}
+    </p>
+  </div>
+</section>

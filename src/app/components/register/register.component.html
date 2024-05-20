@@ -1,0 +1,75 @@
+<section class="w-75 mx-auto shadow rounded p-4 my-3 bg-main-light">
+  <h1 class="my-3">{{ "Register Now" | translate }}</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="handleForm()">
+    <div class="form-item">
+      <label for="Name">{{ "Name" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Name"
+        formControlName="Name"
+      />
+    </div>
+    <div class="form-item">
+      <label for="UserName">{{ "UserName" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="UserName"
+        formControlName="UserName"
+      />
+      <div
+        *ngIf="
+          registerForm.get('UserName')?.errors &&
+          registerForm.get('UserName')?.touched
+        "
+        class="alert alert-danger"
+      >
+        <p
+          *ngIf="
+            registerForm.get('UserName')?.errors &&
+            registerForm.get('UserName')?.touched
+          "
+          class="mb-0"
+        >
+          {{ " UserName is required" | translate }}
+        </p>
+      </div>
+    </div>
+    <div class="form-item">
+      <label for="Password">{{ "Password" | translate }}</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Password"
+        formControlName="Password"
+      />
+      <div
+        *ngIf="
+          registerForm.get('Password')?.errors &&
+          registerForm.get('Password')?.touched
+        "
+        class="alert alert-danger"
+      >
+        <p
+          *ngIf="
+            registerForm.get('Password')?.errors &&
+            registerForm.get('Password')?.touched
+          "
+          class="mb-0"
+        >
+          {{ "Password is required" | translate }}
+        </p>
+      </div>
+    </div>
+    <button [disabled]="registerForm.invalid" class="active-link mt-2 py-2">
+      {{ "Register" | translate }}
+      <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
+    </button>
+  </form>
+  <div>
+    <p *ngIf="errorMessage" class="alert alert-danger mt-1 text-center">
+      {{ errorMessage }}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="">{{
+      "StudentsWebsite" | translate
+    }}</a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            routerLinkActive="active-link"
+            routerLink="/home"
+            >{{ "Home" | translate }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            routerLinkActive="active-link"
+            routerLink="/students"
+            >{{ "Students" | translate }}
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+        <li class="nav-item dropdown me-1">
+          <select
+            class="form-select me-3"
+            (change)="changeLanguage($event)"
+            [(ngModel)]="selectedLanguage"
+            id="language-select"
+            aria-label="Select Language"
+          >
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
+        </li>
+        <li class="nav-item">
+          <span role="button" (click)="signOut()" class="btn btn-primary">{{
+            "SignOut" | translate
+          }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

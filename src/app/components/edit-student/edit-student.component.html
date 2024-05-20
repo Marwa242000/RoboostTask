@@ -1,0 +1,72 @@
+<section class="container">
+  <h2 class="text-center my-3">{{ "UpdateDetails" | translate }}</h2>
+  <form [formGroup]="editStudentForm" (ngSubmit)="updateStudent()">
+    <div class="form-item mb-3">
+      <label for="FirstName">{{ "FirstName" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="FirstName"
+        formControlName="FirstName"
+      />
+    </div>
+    <div class="form-item mb-3">
+      <label for="LastName">{{ "LastName" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="LastName"
+        formControlName="LastName"
+      />
+    </div>
+    <div class="form-item mb-3">
+      <label for="Age">{{ "Age" | translate }}</label>
+      <input
+        type="number"
+        class="form-control"
+        id="Age"
+        formControlName="Age"
+      />
+    </div>
+    <div class="form-item mb-3">
+      <label for="Email">{{ "Email" | translate }}</label>
+      <input
+        type="email"
+        class="form-control"
+        id="Email"
+        formControlName="Email"
+      />
+    </div>
+    <div class="form-item mb-3">
+      <label for="Mobile">{{ "Mobile" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Mobile"
+        formControlName="Mobile"
+      />
+    </div>
+    <div class="form-item mb-3">
+      <label for="NationalID">{{ "NationalID" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        id="NationalID"
+        formControlName="NationalID"
+      />
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary m-2 h-50">
+        {{ "Update" | translate
+        }}<span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary m-2 h-50"
+        [routerLink]="['/students']"
+      >
+        {{ "Back" | translate }}
+      </button>
+    </div>
+  </form>
+</section>
