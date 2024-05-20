@@ -121,4 +121,31 @@ export class StudentsComponent implements OnInit {
     this.searchText = inputElement.value;
     this.search();
   }
+
+  confirmDelete(student: Student): void {
+    const isConfirmed = confirm(
+      `Are you sure you want to delete ${student.Name}?`
+    );
+    if (isConfirmed) {
+      this.deleteStudent(student.ID);
+    }
+  }
+  deleteStudent(studentId: number): void {
+    this._StudentsService.deleteStudent(studentId).subscribe({
+      next: (response) => {
+        if (response.Message === 'تم الحذف بنجاح') {
+          // Remove the deleted student from the list
+          this.student = this.student.filter(
+            (student) => student.ID !== studentId
+          );
+          this.getAllStudents();
+        } else {
+          this.errorMessage = response.Message;
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Error deleting student';
+      },
+    });
+  }
 }

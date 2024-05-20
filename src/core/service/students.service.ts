@@ -15,4 +15,8 @@ export class StudentsService {
   addStudent(student: Student): Observable<any> {
     return this._HttpClient.post<any>(this.baseUrl + 'POST', student);
   }
+  deleteStudent(studentID: number): Observable<any> {
+    const url = `${this.baseUrl}Delete?id=${studentID}`;
+    return this._HttpClient.delete(url);
+  }
 }
