@@ -42,3 +42,155 @@
 </section>
 
 <!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Student</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addStudentForm" (ngSubmit)="addNewStudent()">
+          <p *ngIf="errorMessage" class="alert alert-danger mt-1 text-center">
+            {{ errorMessage }}
+          </p>
+          <div class="form-item mb-3">
+            <label for="FirstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="FirstName"
+              formControlName="FirstName"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('FirstName')?.errors &&
+                addStudentForm.get('FirstName')?.touched
+              "
+              class="alert alert-danger mb-0"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('FirstName')?.errors &&
+                  addStudentForm.get('FirstName')?.touched
+                "
+                class="mb-0"
+              >
+                First Name is required
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="LastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="LastName"
+              formControlName="LastName"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('LastName')?.errors &&
+                addStudentForm.get('LastName')?.touched
+              "
+              class="alert alert-danger"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('LastName')?.errors &&
+                  addStudentForm.get('LastName')?.touched
+                "
+                class="mb-0"
+              >
+                Last Name is required
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="Age">Age</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Age"
+              formControlName="Age"
+            />
+          </div>
+          <div class="form-item mb-3">
+            <label for="Email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="Email"
+              formControlName="Email"
+            />
+            <div
+              *ngIf="
+                addStudentForm.get('Email')?.errors &&
+                addStudentForm.get('Email')?.touched
+              "
+              class="alert alert-danger"
+            >
+              <p
+                *ngIf="
+                  addStudentForm.get('Email')?.errors &&
+                  addStudentForm.get('Email')?.touched
+                "
+                class="mb-0"
+              >
+                Email not valid
+              </p>
+            </div>
+          </div>
+          <div class="form-item mb-3">
+            <label for="Mobile">Mobile</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Mobile"
+              formControlName="Mobile"
+            />
+          </div>
+          <div class="form-item mb-3">
+            <label for="NationalID">National ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NationalID"
+              formControlName="NationalID"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="addStudentForm.invalid"
+              id="closeModal"
+            >
+              Add Student<span *ngIf="isLoading"
+                ><i class="fas fa-spin fa-spinner"></i
+              ></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

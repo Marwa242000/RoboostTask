@@ -30,16 +30,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-
   student: Student[] = [];
   errorMessage: string = '';
-  
+  isLoading: boolean = false;
+
+  addStudentForm: FormGroup;
 
   constructor(
     private _StudentsService: StudentsService,
     private _Router: Router
   ) {
-    
+    this.addStudentForm = new FormGroup({
+      FirstName: new FormControl('', [Validators.required]),
+      LastName: new FormControl('', [Validators.required]),
+      Age: new FormControl('', [Validators.min(1)]),
+      Email: new FormControl('', [Validators.email]),
+      Mobile: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^(\+)?\d{6,14}$/),
+      ]),
+      NationalID: new FormControl(''),
+    });
   }
 
   ngOnInit(): void {
@@ -58,8 +69,26 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  
-  
+  addNewStudent(): void {
+    console.log(this.addStudentForm.value);
+    this.isLoading = true;
 
- 
+    if (this.addStudentForm.valid) {
+      this._StudentsService.addStudent(this.addStudentForm.value).subscribe({
+        next: (response) => {
+          console.log(response);
+          if (response.Message === 'تم الاضافة بنجاح') {
+            this.isLoading = false;
+            this.getAllStudents();
+            this.addStudentForm.reset();
+          } else {
+            this.errorMessage = response.Message;
+          }
+        },
+        error: (err) => {
+          this.errorMessage = 'Error adding student';
+        },
+      });
+    }
+  }
 }

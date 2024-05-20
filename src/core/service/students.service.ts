@@ -12,4 +12,7 @@ export class StudentsService {
   getStudents(): Observable<any> {
     return this._HttpClient.get(this.baseUrl + 'Get');
   }
+  addStudent(student: Student): Observable<any> {
+    return this._HttpClient.post<any>(this.baseUrl + 'POST', student);
+  }
 }
