@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" routerLink="">Students</a>
+    <a class="navbar-brand" routerLink="">{{
+      "StudentsWebsite" | translate
+    }}</a>
     <button
       class="navbar-toggler d-lg-none"
       type="button"
@@ -19,8 +21,7 @@
             class="nav-link active"
             routerLinkActive="active-link"
             routerLink="/home"
-            r
-            >Home
+            >{{ "Home" | translate }}
           </a>
         </li>
         <li class="nav-item">
@@ -28,36 +29,27 @@
             class="nav-link active"
             routerLinkActive="active-link"
             routerLink="/students"
-            r
-            >Students
+            >{{ "Students" | translate }}
           </a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="languageDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+        <li class="nav-item dropdown me-1">
+          <select
+            class="form-select me-3"
+            (change)="changeLanguage($event)"
+            [(ngModel)]="selectedLanguage"
+            id="language-select"
+            aria-label="Select Language"
           >
-            Language
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-            <li>
-              <a class="dropdown-item">English</a>
-            </li>
-            <li>
-              <a class="dropdown-item">Arabic</a>
-            </li>
-          </ul>
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
         </li>
         <li class="nav-item">
-          <span role="button" (click)="signOut()" class="btn btn-primary"
-            >Sign Out</span
-          >
+          <span role="button" (click)="signOut()" class="btn btn-primary">{{
+            "SignOut" | translate
+          }}</span>
         </li>
       </ul>
     </div>

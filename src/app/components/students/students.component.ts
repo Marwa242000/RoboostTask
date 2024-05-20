@@ -13,6 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-students',
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     RouterLink,
+    TranslateModule,
   ],
 
   providers: [StudentsService, ToastrService],
@@ -39,7 +41,8 @@ export class StudentsComponent implements OnInit {
 
   constructor(
     private _StudentsService: StudentsService,
-    private _Router: Router
+    private _Router: Router,
+    private _translateService: TranslateService
   ) {
     this.addStudentForm = new FormGroup({
       FirstName: new FormControl('', [Validators.required]),
@@ -52,6 +55,9 @@ export class StudentsComponent implements OnInit {
       ]),
       NationalID: new FormControl(''),
     });
+    const lang = localStorage.getItem('language') || 'en';
+    this._translateService.setDefaultLang(lang);
+    this._translateService.use(lang);
   }
 
   ngOnInit(): void {
@@ -93,6 +99,32 @@ export class StudentsComponent implements OnInit {
     }
   }
 
+  confirmDelete(student: Student): void {
+    const isConfirmed = confirm(
+      `Are you sure you want to delete ${student.Name}?`
+    );
+    if (isConfirmed) {
+      this.deleteStudent(student.ID);
+    }
+  }
+  deleteStudent(studentId: number): void {
+    this._StudentsService.deleteStudent(studentId).subscribe({
+      next: (response) => {
+        if (response.Message === 'تم الحذف بنجاح') {
+          // Remove the deleted student from the list
+          this.student = this.student.filter(
+            (student) => student.ID !== studentId
+          );
+          this.getAllStudents();
+        } else {
+          this.errorMessage = response.Message;
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Error deleting student';
+      },
+    });
+  }
   search(): void {
     if (!this.searchText) {
       this.getAllStudents();
@@ -120,32 +152,5 @@ export class StudentsComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     this.searchText = inputElement.value;
     this.search();
-  }
-
-  confirmDelete(student: Student): void {
-    const isConfirmed = confirm(
-      `Are you sure you want to delete ${student.Name}?`
-    );
-    if (isConfirmed) {
-      this.deleteStudent(student.ID);
-    }
-  }
-  deleteStudent(studentId: number): void {
-    this._StudentsService.deleteStudent(studentId).subscribe({
-      next: (response) => {
-        if (response.Message === 'تم الحذف بنجاح') {
-          // Remove the deleted student from the list
-          this.student = this.student.filter(
-            (student) => student.ID !== studentId
-          );
-          this.getAllStudents();
-        } else {
-          this.errorMessage = response.Message;
-        }
-      },
-      error: (err) => {
-        this.errorMessage = 'Error deleting student';
-      },
-    });
   }
 }

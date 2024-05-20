@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StudentsService } from '../../../core/service/students.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SimpleStudent, Student } from '../../../core/interface/student';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-student',
@@ -21,6 +22,7 @@ import { SimpleStudent, Student } from '../../../core/interface/student';
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [StudentsService],
   templateUrl: './edit-student.component.html',
@@ -34,7 +36,8 @@ export class EditStudentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private _studentsService: StudentsService
+    private _studentsService: StudentsService,
+    private __translateService: TranslateService
   ) {
     this.editStudentForm = new FormGroup({
       FirstName: new FormControl('', Validators.required),
@@ -48,6 +51,9 @@ export class EditStudentComponent implements OnInit {
       ),
       NationalID: new FormControl(''),
     });
+    const lang = localStorage.getItem('language') || 'en';
+    this.__translateService.setDefaultLang(lang);
+    this.__translateService.use(lang);
   }
 
   ngOnInit(): void {
@@ -68,7 +74,7 @@ export class EditStudentComponent implements OnInit {
         // Split the Name into FirstName and LastName
         const nameParts = studentData.Name.split(' ');
         const firstName = nameParts[0];
-        const lastName = nameParts.slice(1).join(' '); 
+        const lastName = nameParts.slice(1).join(' '); // Handles cases where the last name might have multiple parts
 
         this.studentId = studentData.ID;
         this.editStudentForm.patchValue({
@@ -100,11 +106,11 @@ export class EditStudentComponent implements OnInit {
         NameEnglish: 'English Name',
       };
 
-     // console.log(updatedStudent);
+      console.log(updatedStudent);
 
       this._studentsService.updateStudent(updatedStudent).subscribe({
         next: (response) => {
-        //  console.log(response);
+          console.log(response);
           this.isLoading = false;
           this.router.navigate(['/students']);
         },

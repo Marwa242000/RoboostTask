@@ -1,12 +1,13 @@
 <section>
   <div class="d-flex justify-content-between m-3">
-    <h2 class="text-center">Students List</h2>
+    <h2 class="text-center">{{ "Student List" | translate }}</h2>
     <button
       class="btn btn-primary"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
     >
-      Add Student<span><i class="fa-solid fa-plus ms-1"></i></span>
+      {{ "AddStudent" | translate
+      }}<span><i class="fa-solid fa-plus ms-1"></i></span>
     </button>
   </div>
   <div class="input-group mb-3">
@@ -15,19 +16,21 @@
       class="form-control"
       [(ngModel)]="searchText"
       (input)="onSearchInput($event)"
-      placeholder="Search..."
+      [placeholder]="'Search' | translate"
+      aria-label="Search"
     />
   </div>
+
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
       <thead class="table-light">
         <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Email</th>
-          <th>Mobile</th>
-          <th>National ID</th>
-          <th>Actions</th>
+          <th>{{ "Name" | translate }}</th>
+          <th>{{ "Age" | translate }}</th>
+          <th>{{ "Email" | translate }}</th>
+          <th>{{ "Mobile" | translate }}</th>
+          <th>{{ "NationalID" | translate }}</th>
+          <th>{{ "Action" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -39,13 +42,16 @@
           <td>{{ student.NationalID }}</td>
           <td>
             <button
-              class="btn btn-primary me-1"
+              class="btn btn-primary ms-2"
               [routerLink]="['/edit', student.ID]"
             >
-              Edit
+              {{ "Edit" | translate }}
             </button>
-            <button class="btn btn-danger" (click)="confirmDelete(student)">
-              Delete
+            <button
+              class="btn btn-danger ms-2"
+              (click)="confirmDelete(student)"
+            >
+              {{ "Delete" | translate }}
             </button>
           </td>
         </tr>
@@ -65,7 +71,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Student</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          {{ "AddStudent" | translate }}
+        </h1>
         <button
           type="button"
           class="btn-close"
@@ -79,7 +87,7 @@
             {{ errorMessage }}
           </p>
           <div class="form-item mb-3">
-            <label for="FirstName">First Name</label>
+            <label for="FirstName">{{ "FirstName" | translate }}</label>
             <input
               type="text"
               class="form-control"
@@ -105,7 +113,7 @@
             </div>
           </div>
           <div class="form-item mb-3">
-            <label for="LastName">Last Name</label>
+            <label for="LastName">{{ "LastName" | translate }}</label>
             <input
               type="text"
               class="form-control"
@@ -131,7 +139,7 @@
             </div>
           </div>
           <div class="form-item mb-3">
-            <label for="Age">Age</label>
+            <label for="Age">{{ "Age" | translate }}</label>
             <input
               type="number"
               class="form-control"
@@ -140,7 +148,7 @@
             />
           </div>
           <div class="form-item mb-3">
-            <label for="Email">Email</label>
+            <label for="Email">{{ "Email" | translate }}</label>
             <input
               type="email"
               class="form-control"
@@ -166,7 +174,7 @@
             </div>
           </div>
           <div class="form-item mb-3">
-            <label for="Mobile">Mobile</label>
+            <label for="Mobile">{{ "Mobile" | translate }}</label>
             <input
               type="text"
               class="form-control"
@@ -175,7 +183,7 @@
             />
           </div>
           <div class="form-item mb-3">
-            <label for="NationalID">National ID</label>
+            <label for="NationalID">{{ "NationalID" | translate }}</label>
             <input
               type="text"
               class="form-control"
@@ -189,7 +197,7 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              {{ "Close" | translate }}
             </button>
             <button
               type="submit"
@@ -197,7 +205,8 @@
               [disabled]="addStudentForm.invalid"
               id="closeModal"
             >
-              Add Student<span *ngIf="isLoading"
+              {{ "AddStudent" | translate
+              }}<span *ngIf="isLoading"
                 ><i class="fas fa-spin fa-spinner"></i
               ></span>
             </button>

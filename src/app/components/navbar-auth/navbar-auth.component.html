@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" routerLink="">Students</a>
+    <a class="navbar-brand" routerLink="">{{
+      "StudentsWebsite" | translate
+    }}</a>
     <button
       class="navbar-toggler d-lg-none"
       type="button"
@@ -19,18 +21,28 @@
             class="nav-link active"
             routerLinkActive="active-link"
             routerLink="/login"
-            r
-            >LogIn
+            >{{ "LogIn" | translate }}
           </a>
         </li>
         <li class="nav-item">
           <a
-            class="nav-link active"
+            class="nav-link active ms-1 me-2"
             routerLinkActive="active-link"
             routerLink="/register"
-            r
-            >Register
+            >{{ "Register" | translate }}
           </a>
+        </li>
+        <li class="nav-item dropdown me-1">
+          <select
+            class="form-select me-3"
+            (change)="changeLanguage($event)"
+            [(ngModel)]="selectedLanguage"
+            id="language-select"
+            aria-label="Select Language"
+          >
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
         </li>
       </ul>
     </div>

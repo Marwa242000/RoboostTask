@@ -9,18 +9,32 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../../core/service/auth.service';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    TranslateModule,
+  ],
   providers: [AuthService],
 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private _AuthService: AuthService, private _Router: Router) {}
+  constructor(
+    private _AuthService: AuthService,
+    private _Router: Router,
+    private __translateService: TranslateService
+  ) {
+    const lang = localStorage.getItem('language') || 'en';
+    this.__translateService.setDefaultLang(lang);
+    this.__translateService.use(lang);
+  }
 
   isLoading: boolean = false;
   errorMessage: string = '';

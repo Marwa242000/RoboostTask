@@ -1,8 +1,8 @@
 <section class="w-75 mx-auto shadow rounded p-4 my-3 bg-main-light">
-  <h1 class="my-3">LogIn Now</h1>
+  <h1 class="my-3">{{ "LogIn Now" | translate }}</h1>
   <form [formGroup]="loginForm" (ngSubmit)="handleForm()">
     <div class="form-item">
-      <label for="UserName">UserName</label>
+      <label for="UserName">{{ "UserName" | translate }}</label>
       <input
         type="text"
         class="form-control"
@@ -23,12 +23,12 @@
           "
           class="mb-0"
         >
-          UserName is required
+          {{ "UserName is required" | translate }}
         </p>
       </div>
     </div>
     <div class="form-item">
-      <label for="Password">Password</label>
+      <label for="Password">{{ "Password" | translate }}</label>
       <input
         type="password"
         class="form-control"
@@ -49,12 +49,12 @@
           "
           class="mb-0"
         >
-          Password is required
+          {{ "Password is required" | translate }}
         </p>
       </div>
     </div>
     <button [disabled]="loginForm.invalid" class="active-link mt-2 py-2">
-      LogIn
+      {{ "LogIn" | translate }}
       <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
     </button>
   </form>

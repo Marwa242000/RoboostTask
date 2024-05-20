@@ -8,6 +8,13 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "en": "src/assets/i18n/en.json",
+          "ar": "src/assets/i18n/ar.json"
+        }
+      },
       "prefix": "app",
       "architect": {
         "build": {
