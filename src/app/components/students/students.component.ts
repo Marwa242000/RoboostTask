@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export class StudentsComponent implements OnInit {
   student: Student[] = [];
   errorMessage: string = '';
+  searchText: string = '';
   isLoading: boolean = false;
 
   addStudentForm: FormGroup;
@@ -90,5 +91,34 @@ export class StudentsComponent implements OnInit {
         },
       });
     }
+  }
+
+  search(): void {
+    if (!this.searchText) {
+      this.getAllStudents();
+      return;
+    }
+    this.student = this.student.filter((student) =>
+      this.matchesSearchCriteria(student)
+    );
+  }
+
+  matchesSearchCriteria(student: Student): boolean {
+    const searchTextLower = this.searchText.toLowerCase();
+    return (
+      student.Name.toLowerCase().includes(searchTextLower) ||
+      (student.Mobile && student.Mobile.toString().includes(searchTextLower)) ||
+      (student.NationalID &&
+        student.NationalID.toString().includes(searchTextLower)) ||
+      (student.Age !== null &&
+        student.Age !== undefined &&
+        student.Age.toString().includes(searchTextLower))
+    );
+  }
+
+  onSearchInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchText = inputElement.value;
+    this.search();
   }
 }

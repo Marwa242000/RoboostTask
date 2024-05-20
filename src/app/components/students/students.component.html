@@ -10,7 +10,13 @@
     </button>
   </div>
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search..." />
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="searchText"
+      (input)="onSearchInput($event)"
+      placeholder="Search..."
+    />
   </div>
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
