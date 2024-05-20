@@ -1,0 +1,44 @@
+<section>
+  <div class="d-flex justify-content-between m-3">
+    <h2 class="text-center">Students List</h2>
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Add Student<span><i class="fa-solid fa-plus ms-1"></i></span>
+    </button>
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search..." />
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>National ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of student">
+          <td>{{ student.Name }}</td>
+          <td>{{ student.Age }}</td>
+          <td>{{ student.Email }}</td>
+          <td>{{ student.Mobile }}</td>
+          <td>{{ student.NationalID }}</td>
+          <td>
+            <button class="btn btn-primary me-1">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Modal -->
